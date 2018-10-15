@@ -162,6 +162,8 @@ Array
 
 e.g. http://127.0.0.1:12312/moon.php
 
+Use with '?refresh' to refresh
+
 Returns:
 
 ```

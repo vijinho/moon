@@ -22,7 +22,7 @@ switch (php_sapi_name()) {
         define('DEBUG', 0);
         $save_data = 0;
         $params = [
-            'date',
+            'date', 'refresh'
         ];
 
         // filter input variables
