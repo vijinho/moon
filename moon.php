@@ -7,6 +7,7 @@
  * @author Vijay Mahrra <vijay@yoyo.org>
  * @copyright (c) Copyright 2018 Vijay Mahrra
  * @license GPLv3 (http://www.gnu.org/licenses/gpl-3.0.html)
+ * @url https://github.com/vijinho/moon
  * @see https://github.com/solarissmoke/php-moon-phase
  */
 date_default_timezone_set('UTC');
@@ -251,6 +252,9 @@ if (!empty($date)) {
     verbose(sprintf("Fetching results FROM date/time '%s': %s",
             $options['date'], gmdate('r', $date)));
 }
+if (empty($date)) {
+    $date = time();
+}
 
 //-----------------------------------------------------------------------------
 // round result?
@@ -436,4 +440,3 @@ function to_charset($data, $to_charset = 'UTF-8', $from_charset = 'auto')
     }
     return $data;
 }
-
