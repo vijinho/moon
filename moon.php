@@ -154,7 +154,7 @@ if (empty($options) || array_key_exists('h', $options) || array_key_exists('help
         "\t-e,  --echo                   (Optional) Echo/output the result to stdout if successful",
         "\t-r,  --refresh                (Optional) Force cache-refresh",
         "\t     --date={now}             (Optional) Date/time default 'now' see: https://secure.php.net/manual/en/function.strtotime.php",
-        "\t     --dir={.}                (Optional) Directory for storing files (current dir if not specified)",
+        "\t     --dir=                   (Optional) Directory for storing files (sys_get_temp_dir() if not specified)",
         "\t-f,  --filename={output.}     (Optional) Filename for output data from operation",
         "\t     --format={json}          (Optional) Output format for output filename (reserved for future): json (default)",
     ]);
@@ -194,7 +194,7 @@ verbose("OUTPUT_FORMAT: $format");
 //-----------------------------------------------------------------------------
 // get dir and file for output
 
-$dir = '';
+$dir = sys_get_temp_dir();
 if (!empty($options['dir'])) {
     $dir = $options['dir'];
 }
@@ -229,7 +229,7 @@ if (!empty($date)) {
 
 // load from cache
 $cache_key  = 'moon-' . $date;
-$cache_dir  = realpath(dirname(__FILE__)) . '/cache';
+$cache_dir  = $dir;
 $cache_file = $cache_dir . '/' . $cache_key . '.json';
 
 // load from cache, expire if out-of-date in order to refresh after
@@ -284,7 +284,7 @@ if (is_array($data) && !empty($data)) {
 if (!empty($output)) {
 
     if ($save_data && !empty($output_filename)) {
-        $file = realpath($dir) . '/' . $output_filename;
+        $file = $output_filename;
         switch (OUTPUT_FORMAT) {
             default:
             case 'json':
