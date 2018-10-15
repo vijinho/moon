@@ -4,6 +4,9 @@ CLI script `moon.php` instantiates class [solarissmoke/php-moon-phase](https://g
 
 The script can also be run as a web-service with PHP's in-built webserver for testing the JSON request/responses.
 
+*NOTE:* Originally this script called the burning soul REST API to get the data, that
+previous code is on this branch: https://github.com/vijinho/moon/tree/burningsoul
+
 ## Features
 
 - Runs on the command-line
