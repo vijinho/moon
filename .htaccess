@@ -1,0 +1,6 @@
+<Files 'moon.ini'>
+Order Allow,Deny
+Deny from all
+</Files>
+
+DirectoryIndex moon.php
