@@ -1,0 +1,8 @@
+; burning soul moon api configuration file
+
+[settings]
+timezone = 'UTC'
+cache[seconds] = 3600;
+
+[api]
+url = 'http://api.burningsoul.in/moon/'
