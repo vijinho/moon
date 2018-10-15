@@ -1,7 +1,7 @@
 <?php
 
 /**
- * moon.php - CLI script for interacting with burningsoul moon api
+ * moon.php - CLI/WWW script for getting lunar phase
  * relies on command-line tools, tested on MacOS.
  *
  * @author Vijay Mahrra <vijay@yoyo.org>
