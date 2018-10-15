@@ -56,7 +56,7 @@ Call to the burning soul moon API - https://burningsoul.in/apis/moon
         -e,  --echo                   (Optional) Echo/output the result to stdout if successful
         -r,  --refresh                (Optional) Force cache-refresh
              --date={now}             (Optional) Date/time default 'now' see: https://secure.php.net/manual/en/function.strtotime.php
-             --dir={.}                (Optional) Directory for storing files (current dir if not specified)
+             --dir={}                 (Optional) Directory for storing files (sys_get_temp_dir() if not specified)
         -f,  --filename={output.}     (Optional) Filename for output data from operation, default is 'output.{--format}'
              --format={json}          (Optional) Output format for script data: json (default)
 ```
