@@ -160,9 +160,7 @@ Array
 
 ### Webservice Example 1
 
-e.g. For -id 999999 http://127.0.0.1:12312/moon.php
-
-http://127.0.0.1:12312/moon.php?city-id=999999
+e.g. http://127.0.0.1:12312/moon.php
 
 Returns:
 
@@ -210,5 +208,5 @@ Result:
 }
 ```
 
---
+----
 vijay@yoyo.org
