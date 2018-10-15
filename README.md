@@ -22,6 +22,23 @@ The script can also be run as a web-service with PHP's in-built webserver for te
 
 ## Returned results fields/columns/keys
 
+ - `phase`: the terminator phase angle as a fraction of a full circle (i.e., 0 to 1). Both 0 and 1 correspond to a New Moon, and 0.5 corresponds to a Full Moon.
+ - `illumination`: the illuminated fraction of the Moon (0 = New, 1 = Full).
+ - `age_days`: the age of the Moon, in days.
+ - `distance_km`: the distance of the Moon from the centre of the Earth (kilometres).
+ - `diameter`: the angular diameter subtended by the Moon as seen by an observer at the centre of the Earth (degrees).
+ - `sun_distance_km`: the distance to the Sun (kilometres).
+ - `sun_diameter`: the angular diameter subtended by the Sun as seen by an observer at the centre of the Earth (degrees).
+ - `new_moon`: the time of the last New Moon (UNIX timestamp).
+ - `next_new_moon`: the time of the next New Moon (UNIX timestamp).
+ - `full_moon`: the time of the Full Moon in the current lunar cycle (UNIX timestamp).
+ - `next_full_moon`: the time of the next Full Moon in the current lunar cycle (UNIX timestamp).
+ - `first_quarter`: the time of the first quarter in the current lunar cycle (UNIX timestamp).
+ - `next_first_quarter`: the time of the next first quarter in the current lunar cycle (UNIX timestamp).
+ - `last_quarter`: the time of the last quarter in the current lunar cycle (UNIX timestamp).
+ - `next_last_quarter`: the time of the next last quarter in the current lunar cycle (UNIX timestamp).
+ - `phase_name`: the [phase name](http://aa.usno.navy.mil/faq/docs/moon_phases.php).
+ - `stage`: the phase waxing/waning
 
 ## Instructions
 
