@@ -13,6 +13,7 @@ previous code is on this branch: https://github.com/vijinho/moon/tree/burningsou
 - Can be called as a stand-alone webservice using the php command line built-in server
 - All messages when running with `--debug` or `--verbose` are to *stderr* to avoid interference with *stdout*
 - Can output the result if successful to *stdout*
+- Specify date-format using [php date()](https://secure.php.net/manual/en/function.date.php)
 - Errors are output in JSON as 'errors' with just a bunch of strings
 
 ```
@@ -57,7 +58,8 @@ Get the moon phase data using class https://github.com/solarissmoke/php-moon-pha
         -d,  --debug                  Run in debug mode (implies also -v, --verbose)
         -r,  --round                  (Optional) Round returned esults
         -t   --date={now}             (Optional) Date/time default 'now' see: https://secure.php.net/manual/en/function.strtotime.php
-```
+             --date-format={U}        (Optional) Format to output, using date(), default unixtime, see: https://secure.php.net/manual/en/function.date.php
+ ```
 
 ### Requirements/Installation
 

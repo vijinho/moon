@@ -42,11 +42,12 @@ class MyMoonPhase extends Solaris\MoonPhase
      * return the values as a array
      * method allows outputting values as an array
      *
+     * @param string date_format format to date()
      * @param boolean $round round the result?
      * @return array moon phase information
      * @link http://php.net/manual/en/language.oop5.magic.php#object.tostring
      */
-    public function toArray($round = false): array
+    public function toArray($round = false, $date_format = 'U'): array
     {
         return [
             'timestamp'          => $this->ts,
@@ -56,16 +57,16 @@ class MyMoonPhase extends Solaris\MoonPhase
             'age_days'           => $round ? round($this->age(), 3) : $this->age(),
             'distance_km'        => $round ? ceil($this->distance()) : $this->distance(),
             'diameter'           => $round ? round($this->diameter(), 3) : $this->diameter(),
-            'sun_distance_km'     => $round ? ceil($this->sundistance()) : $this->sundistance(),
-            'sun_diameter'        => $round ? round($this->sundiameter(), 3) : $this->sundiameter(),
-            'new_moon_last'      => $round ? round($this->new_moon()) : $this->new_moon(),
-            'new_moon_next'      => $round ? round($this->next_new_moon()) : $this->next_new_moon(),
-            'full_moon'          => $round ? round($this->full_moon()) : $this->full_moon(),
-            'full_moon_next'     => $round ? round($this->next_full_moon()) : $this->next_full_moon(),
-            'first_quarter'      => $round ? round($this->first_quarter()) : $this->first_quarter(),
-            'first_quarter_next' => $round ? round($this->next_first_quarter()) : $this->next_first_quarter(),
-            'last_quarter'       => $round ? round($this->last_quarter()) : $this->last_quarter(),
-            'last_quarter_next'  => $round ? round($this->next_last_quarter()) : $this->next_last_quarter(),
+            'sun_distance_km'    => $round ? ceil($this->sundistance()) : $this->sundistance(),
+            'sun_diameter'       => $round ? round($this->sundiameter(), 3) : $this->sundiameter(),
+            'new_moon_last'      => date($date_format, $round ? round($this->new_moon()) : $this->new_moon()),
+            'new_moon_next'      => date($date_format, $round ? round($this->next_new_moon()) : $this->next_new_moon()),
+            'full_moon'          => date($date_format, $round ? round($this->full_moon()) : $this->full_moon()),
+            'full_moon_next'     => date($date_format, $round ? round($this->next_full_moon()) : $this->next_full_moon()),
+            'first_quarter'      => date($date_format, $round ? round($this->first_quarter()) : $this->first_quarter()),
+            'first_quarter_next' => date($date_format, $round ? round($this->next_first_quarter()) : $this->next_first_quarter()),
+            'last_quarter'       => date($date_format, $round ? round($this->last_quarter()) : $this->last_quarter()),
+            'last_quarter_next'  => date($date_format, $round ? round($this->next_last_quarter()) : $this->next_last_quarter()),
             'phase_name'         => $round ? round($this->phase_name()) : $this->phase_name(),
             'stage'              => $this->phase() < 0.5 ? 'waxing' : 'waning'
         ];
@@ -88,13 +89,14 @@ class MyMoonPhase extends Solaris\MoonPhase
      * return the values as a string
      * method allows outputting values as a string
      *
+     * @param string date_format format to date()
      * @param boolean $round round the result?
      * @return string json_encode()
      * @link http://php.net/manual/en/language.oop5.magic.php#object.tostring
      */
-    public function toJSON($round = false): string
+    public function toJSON($round = false, $date_format = 'U'): string
     {
-        return json_encode(to_charset($this->toArray($round)), JSON_PRETTY_PRINT);
+        return json_encode(to_charset($this->toArray($round, $date_format)), JSON_PRETTY_PRINT);
     }
 
 
@@ -166,7 +168,7 @@ switch (php_sapi_name()) {
 // see https://secure.php.net/manual/en/function.getopt.php
 // : - required, :: - optional
 
-$options = getopt("hvdrt:", ['help', 'verbose', 'debug', 'date:', 'round']);
+$options = getopt("hvdrt:", ['help', 'verbose', 'debug', 'date:', 'date-format:', 'round']);
 
 $do = [];
 foreach ([
@@ -214,6 +216,7 @@ if (array_key_exists('h', $options) || array_key_exists('help', $options)) {
         "\t-d,  --debug                  Run in debug mode (implies also -v, --verbose)",
         "\t-r,  --round                  (Optional) Round returned esults",
         "\t-t   --date={now}             (Optional) Date/time default 'now' see: https://secure.php.net/manual/en/function.strtotime.php",
+        "\t     --date-format={U}        (Optional) Format to output, using date(), default unixtime, see: https://secure.php.net/manual/en/function.date.php",
     ]);
 
     // goto jump here if there's a problem
@@ -257,6 +260,17 @@ if (empty($date)) {
 }
 
 //-----------------------------------------------------------------------------
+// date format
+$date_format = 'U';
+if (!empty($options['date-format'])) {
+    $date_format = $options['date-format'];
+    if (false === date($date_format)) {
+        $errors[] = "Invalid date format: $date_format";
+        goto errors;
+    }
+}
+
+//-----------------------------------------------------------------------------
 // round result?
 
 $round = array_key_exists('round', $options) | array_key_exists('r', $options);
@@ -271,7 +285,7 @@ $moon->setTimeStamp($date);
 //-----------------------------------------------------------------------------
 // final output of data
 
-echo $moon->toJSON($round);
+echo $moon->toJSON($round, $date_format);
 
 end:
 
