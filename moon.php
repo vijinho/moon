@@ -126,7 +126,7 @@ switch (php_sapi_name()) {
         define('DEBUG', 0);
         $save_data = 0;
         $params    = [
-            'date', 'refresh', 'round'
+            'date', 'refresh', 'round', 'date-format'
         ];
 
         // filter input variables

@@ -59,7 +59,7 @@ Get the moon phase data using class https://github.com/solarissmoke/php-moon-pha
         -r,  --round                  (Optional) Round returned esults
         -t   --date={now}             (Optional) Date/time default 'now' see: https://secure.php.net/manual/en/function.strtotime.php
              --date-format={U}        (Optional) Format to output, using date(), default unixtime, see: https://secure.php.net/manual/en/function.date.php
- ```
+```
 
 ### Requirements/Installation
 
