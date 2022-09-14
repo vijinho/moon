@@ -278,7 +278,7 @@ $round = array_key_exists('round', $options) | array_key_exists('r', $options);
 //-----------------------------------------------------------------------------
 // MAIN
 // set up request params for sg_point_request($request_params)
-$moon = new MyMoonPhase( new DateTime(date("Y-m-d H:i:s", $dateInt)) );
+$moon = new MyMoonPhase( new DateTime(date("Y-m-d H:i:s", $date)) );
 $moon->setTimeStamp($date);
 
 //-----------------------------------------------------------------------------
