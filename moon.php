@@ -52,23 +52,23 @@ class MyMoonPhase extends Solaris\MoonPhase
         return [
             'timestamp'          => $this->ts,
             'datestamp'          => date('r', $this->ts),
-            'phase'              => $round ? round($this->phase(), 3) : $this->phase(),
-            'illumination'       => $round ? round($this->illumination(), 3) : $this->illumination(),
-            'age_days'           => $round ? round($this->age(), 3) : $this->age(),
-            'distance_km'        => $round ? ceil($this->distance()) : $this->distance(),
-            'diameter'           => $round ? round($this->diameter(), 3) : $this->diameter(),
-            'sun_distance_km'    => $round ? ceil($this->sundistance()) : $this->sundistance(),
-            'sun_diameter'       => $round ? round($this->sundiameter(), 3) : $this->sundiameter(),
-            'new_moon_last'      => date($date_format, $round ? round($this->new_moon()) : $this->new_moon()),
-            'new_moon_next'      => date($date_format, $round ? round($this->next_new_moon()) : $this->next_new_moon()),
-            'full_moon'          => date($date_format, $round ? round($this->full_moon()) : $this->full_moon()),
-            'full_moon_next'     => date($date_format, $round ? round($this->next_full_moon()) : $this->next_full_moon()),
-            'first_quarter'      => date($date_format, $round ? round($this->first_quarter()) : $this->first_quarter()),
-            'first_quarter_next' => date($date_format, $round ? round($this->next_first_quarter()) : $this->next_first_quarter()),
-            'last_quarter'       => date($date_format, $round ? round($this->last_quarter()) : $this->last_quarter()),
-            'last_quarter_next'  => date($date_format, $round ? round($this->next_last_quarter()) : $this->next_last_quarter()),
-            'phase_name'         => $round ? round($this->phase_name()) : $this->phase_name(),
-            'stage'              => $this->phase() < 0.5 ? 'waxing' : 'waning'
+            'phase'              => $round ? round($this->getPhase(), 3) : $this->getPhase(),
+            'illumination'       => $round ? round($this->getIllumination(), 3) : $this->getIllumination(),
+            'age_days'           => $round ? round($this->getAge(), 3) : $this->getAge(),
+            'distance_km'        => $round ? ceil($this->getDistance()) : $this->getDistance(),
+            'diameter'           => $round ? round($this->getDiameter(), 3) : $this->getDiameter(),
+            'sun_distance_km'    => $round ? ceil($this->getSunDiameter()) : $this->getSunDiameter(),
+            'sun_diameter'       => $round ? round($this->getSunDistance(), 3) : $this->getSunDistance(),
+            'new_moon_last'      => date($date_format, $round ? round($this->getPhaseNewMoon()) : $this->getPhaseNewMoon()),
+            'new_moon_next'      => date($date_format, $round ? round($this->getPhaseNextNewMoon()) : $this->getPhaseNextNewMoon()),
+            'full_moon'          => date($date_format, $round ? round($this->getPhaseFullMoon()) : $this->getPhaseFullMoon()),
+            'full_moon_next'     => date($date_format, $round ? round($this->getPhaseNextFullMoon()) : $this->getPhaseNextFullMoon()),
+            'first_quarter'      => date($date_format, $round ? round($this->getPhaseFirstQuarter()) : $this->getPhaseFirstQuarter()),
+            'first_quarter_next' => date($date_format, $round ? round($this->getPhaseNextFirstQuarter()) : $this->getPhaseNextFirstQuarter()),
+            'last_quarter'       => date($date_format, $round ? round($this->getPhaseLastQuarter()) : $this->getPhaseLastQuarter()),
+            'last_quarter_next'  => date($date_format, $round ? round($this->getPhaseNextLastQuarter()) : $this->getPhaseNextLastQuarter()),
+            'phase_name'         => $round ? round($this->getPhaseName()) : $this->getPhaseName(),
+            'stage'              => $this->getPhase() < 0.5 ? 'waxing' : 'waning'
         ];
     }
 
@@ -278,8 +278,7 @@ $round = array_key_exists('round', $options) | array_key_exists('r', $options);
 //-----------------------------------------------------------------------------
 // MAIN
 // set up request params for sg_point_request($request_params)
-
-$moon = new MyMoonPhase($date);
+$moon = new MyMoonPhase( new DateTime(date("Y-m-d H:i:s", $dateInt)) );
 $moon->setTimeStamp($date);
 
 //-----------------------------------------------------------------------------
